@@ -1,0 +1,29 @@
+<!--将layout.html设置为父类模板，继承父类模板的html，则在index.html中展示的内容还是跟layout.html一样的-->
+{% extends 'layout.html' %} <!--继承父级-->
+
+<!--面向对象的继承-->
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>错误提示</span></li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">错误提示</div>
+    <div class="panel-body">{{message}}</div>
+    <div class="panel-footer">
+        <!--传url则返回url指定路径-->
+        {% if url %}
+        <a href="{{url}}">点击这里跳转</a>
+        <!--不传url则返回上一步-->
+        {% else %}
+        <a href="javascript:window.history.back();">返回上一步</a>
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+
+{%endblock%}

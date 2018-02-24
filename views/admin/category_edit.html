@@ -1,0 +1,25 @@
+<!--将layout.html设置为父类模板，继承父类模板的html，则在index.html中展示的内容还是跟layout.html一样的-->
+{% extends 'layout.html' %} <!--继承父级-->
+
+<!--面向对象的继承-->
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>分类编辑</span></li>
+</ol>
+
+<h3>分类编辑 - {{category.name}}</h3>
+<!--表单：以post方式提交-->
+
+<!--管理员修改分类确认后，以post方式来提交请求-->
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="name">分类名称:</label>
+        <input type="text" value="{{category.name}}" class="form-control" id="name" placeholder="请输入分类名称" name="name">
+    </div>
+
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
+
+{%endblock%}

@@ -1,0 +1,41 @@
+<!--将layout.html设置为父类模板，继承父类模板的html，则在index.html中展示的内容还是跟layout.html一样的-->
+{% extends 'layout.html' %} <!--继承父级-->
+
+<!--面向对象的继承-->
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>分类列表</span></li>
+</ol>
+
+<h3>分类列表</h3>
+
+<!--注意，在引用page.html页面时，要在 user_index.html 的后端代码中传入page.html的相关参数-->
+{%include 'page.html'%}
+
+<table class="table table-hover table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>分类名称</th>
+        <th>操作</th>
+    </tr>
+
+    <!--循环输出传递过来的users数组里的数据，将它放到tr中-->
+    {% for category in categories %}
+    <tr>
+        <td>{{category._id.toString()}}</td>
+        <td>{{category.name}}</td>
+        <td>
+            <a href="/admin/category/edit?id={{category._id.toString()}}">修改</a>|
+            <a href="/admin/category/delete?id={{category._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<!--include方法：：把另外一个页面通过引用的方式包含进来-->
+{%include 'page.html'%}
+
+{%endblock%}

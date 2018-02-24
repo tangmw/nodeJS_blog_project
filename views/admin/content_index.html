@@ -1,0 +1,53 @@
+<!--将layout.html设置为父类模板，继承父类模板的html，则在index.html中展示的内容还是跟layout.html一样的-->
+{% extends 'layout.html' %} <!--继承父级-->
+
+<!--面向对象的继承-->
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>内容列表</span></li>
+</ol>
+
+<h3>内容列表</h3>
+
+<!--注意，在引用page.html页面时，要在 user_index.html 的后端代码中传入page.html的相关参数-->
+{%include 'page.html'%}
+
+<table class="table table-hover table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>分类名称</th>
+        <th>标题</th>
+        <th>作者</th>
+        <th>添加时间</th>
+        <th>阅读量</th>
+        <th>操作</th>
+    </tr>
+
+    <!--循环输出传递过来的contents数组里的数据，将它放到tr中-->
+    {% for content in contents %}
+    <tr>
+        <td>{{content._id.toString()}}</td>
+        <td>{{content.category.name}}</td>
+        <td>{{content.title}}</td>
+        <td>{{content.user.username}}</td>
+        <!--addTime是一个日期对象，需要解析，需要自己去写，我们使用的模板引擎swig它本身就提供了一种过滤器的方式，在后面加管道符，后面跟上过滤函数date   这个在node_modules/swig/lib/filters.js里存的就是一堆的过滤器，其中就有一个date-->
+        <!--前面这个content.addTime数据将作为date的第一个参数-->
+        <!--Ymdhis代表年月日时分秒，Y代表全年份，如2018-->
+        <!--这里date的第一个参数是content.addTime，第二个参数是Y-m-d H:i:s-->
+        <td>{{content.addTime|date('Y-m-d H:i:s',-8*60)}}</td>
+        <td>{{content.views}}</td>
+        <td>
+            <a href="/admin/content/edit?id={{content._id.toString()}}">修改</a>|
+            <a href="/admin/content/delete?id={{content._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<!--include方法：：把另外一个页面通过引用的方式包含进来-->
+{%include 'page.html'%}
+
+{%endblock%}

@@ -1,0 +1,17 @@
+nodejs----v8.9.4
+基础核心开发语言
+
+Express
+一个简洁而灵活的node.js Web应用框架，提供一系列强大的特性帮助我们创建各种Web应用
+
+Mongodb
+用于存储在Web应用当中产生的一些数据，包括注册的用户、添加的分类、发表的文章以及对文章的评论
+
+
+第三方模块&中间件
+    bodyParser：解析post请求数据
+    cookies：读写cookie
+    swig：   模块解析引擎
+    mongoose：操作mongodb数据
+    markdown：markdown语法解析生成模块
+    ......

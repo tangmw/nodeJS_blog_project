@@ -1,0 +1,10 @@
+<!--将layout.html设置为父类模板，继承父类模板的html，则在index.html中展示的内容还是跟layout.html一样的-->
+{% extends 'layout.html' %}
+
+<!--面向对象的继承-->
+{%block main%}
+<div class="jumbotron">
+    <h1>Hello, {{userInfo.username}}!</h1>
+    <p>欢迎进入我的博客后台管理！</p>
+</div>
+{%endblock%}
